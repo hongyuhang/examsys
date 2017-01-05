@@ -1,6 +1,6 @@
 package examsys.first.domain;
 
-public class Question {
+public class Question extends BaseInfo  {
     private Long questionId;
 
     private Long testpaperId;

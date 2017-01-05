@@ -37,6 +37,22 @@
 		  on exam_category_tbl.code = exam_category_compose_tbl.code
 		where exam_category_tbl.code = #{code,jdbcType=VARCHAR}
 	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+			exam_category_tbl.code,
+			exam_category_tbl.name,
+			exam_category_tbl.score,
+			exam_category_tbl.time,
+			exam_category_tbl.pass_score,
+			exam_category_compose_tbl.code as category_code,
+			exam_category_compose_tbl.type,
+			exam_category_compose_tbl.count
+		from exam_category_tbl 
+	   inner join exam_category_compose_tbl
+		  on exam_category_tbl.code = exam_category_compose_tbl.code
+	</select>
+	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
 		delete from exam_category_tbl
 		where code = #{code,jdbcType=VARCHAR}

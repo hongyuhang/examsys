@@ -1,6 +1,9 @@
 package examsys.first.service;
 
+import java.util.List;
+
 import examsys.first.domain.Category;
+
 
 public interface CategoryService {
 	
@@ -10,4 +13,10 @@ public interface CategoryService {
 	 * @return
 	 */
 	public Category getCategory(String categoryCode);
+	
+	/**
+	 * 得到所有的考试类型
+	 * @return
+	 */
+	public List<Category> getAllCatgory();
 }

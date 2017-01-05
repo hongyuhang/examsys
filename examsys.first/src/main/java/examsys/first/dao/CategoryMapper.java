@@ -1,5 +1,7 @@
 package examsys.first.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import examsys.first.domain.Category;
@@ -12,6 +14,8 @@ public interface CategoryMapper {
     int insertSelective(Category record);
 
     Category selectByPrimaryKey(String code);
+    
+    List<Category> selectAll();
 
     int updateByPrimaryKeySelective(Category record);
 

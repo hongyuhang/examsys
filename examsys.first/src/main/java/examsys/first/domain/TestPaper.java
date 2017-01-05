@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
-public class TestPaper {
+public class TestPaper extends BaseInfo  {
     private Long testpaperId;
 
     private String categoryName;

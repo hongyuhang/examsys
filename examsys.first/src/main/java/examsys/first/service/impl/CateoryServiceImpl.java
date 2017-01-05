@@ -1,5 +1,7 @@
 package examsys.first.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,11 @@ public class CateoryServiceImpl implements CategoryService {
 	 */
 	public Category getCategory(String categoryCode) {
 		return mapper.selectByPrimaryKey(categoryCode);
+	}
+
+	@Override
+	public List<Category> getAllCatgory() {
+		return mapper.selectAll();
 	}
 
 }

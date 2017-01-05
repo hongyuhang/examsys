@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
-public class Category {
+public class Category extends BaseInfo {
     private String code;
 
     private String name;

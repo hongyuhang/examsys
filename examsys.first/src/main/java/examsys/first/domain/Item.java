@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
-public class Item {
+public class Item extends BaseInfo  {
     private Long itemId;
 
     private String code;

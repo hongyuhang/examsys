@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Option {
+public class Option extends BaseInfo  {
     private Long optionId;
 
     private Long itemId;

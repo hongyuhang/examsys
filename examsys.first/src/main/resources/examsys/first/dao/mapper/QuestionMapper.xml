@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="examsys.first.dao.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="examsys.first.domain.Question" >
+    <id column="question_id" property="questionId" jdbcType="BIGINT" />
+    <result column="testpaper_id" property="testpaperId" jdbcType="BIGINT" />
+    <result column="question_content" property="questionContent" jdbcType="VARCHAR" />
+    <result column="seq" property="seq" jdbcType="INTEGER" />
+    <result column="correct_flag" property="correctFlag" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    question_id, testpaper_id, question_content, seq, correct_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from exam_question_tbl
+    where question_id = #{questionId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from exam_question_tbl
+    where question_id = #{questionId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="examsys.first.domain.Question" >
+    insert into exam_question_tbl (question_id, testpaper_id, question_content, 
+      seq, correct_flag)
+    values (#{questionId,jdbcType=BIGINT}, #{testpaperId,jdbcType=BIGINT}, #{questionContent,jdbcType=VARCHAR}, 
+      #{seq,jdbcType=INTEGER}, #{correctFlag,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="examsys.first.domain.Question" >
+    insert into exam_question_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="testpaperId != null" >
+        testpaper_id,
+      </if>
+      <if test="questionContent != null" >
+        question_content,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="correctFlag != null" >
+        correct_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        #{questionId,jdbcType=BIGINT},
+      </if>
+      <if test="testpaperId != null" >
+        #{testpaperId,jdbcType=BIGINT},
+      </if>
+      <if test="questionContent != null" >
+        #{questionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="correctFlag != null" >
+        #{correctFlag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="examsys.first.domain.Question" >
+    update exam_question_tbl
+    <set >
+      <if test="testpaperId != null" >
+        testpaper_id = #{testpaperId,jdbcType=BIGINT},
+      </if>
+      <if test="questionContent != null" >
+        question_content = #{questionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="correctFlag != null" >
+        correct_flag = #{correctFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where question_id = #{questionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="examsys.first.domain.Question" >
+    update exam_question_tbl
+    set testpaper_id = #{testpaperId,jdbcType=BIGINT},
+      question_content = #{questionContent,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=INTEGER},
+      correct_flag = #{correctFlag,jdbcType=TINYINT}
+    where question_id = #{questionId,jdbcType=BIGINT}
+  </update>
+</mapper>

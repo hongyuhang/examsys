@@ -1,0 +1,7 @@
+/target/
+/examsys.log
+/lifecycle.xml
+/mysql-connector-java-5.1.38.jar
+/.classpath
+/.DS_Store
+/.project

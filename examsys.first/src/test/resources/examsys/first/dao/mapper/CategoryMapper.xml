@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="examsys.first.dao.CategoryMapper">
+	<resultMap id="BaseResultMap" type="examsys.first.domain.Category">
+		<id column="code" property="code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="score" property="score" jdbcType="INTEGER" />
+		<result column="time" property="time" jdbcType="INTEGER" />
+		<result column="pass_score" property="passScore" jdbcType="INTEGER" />
+		<collection property="composes" ofType="examsys.first.domain.CategoryCompose"
+			javaType="ArrayList" resultMap="ComposeResultMap" />
+	</resultMap>
+
+	<resultMap id="ComposeResultMap" type="examsys.first.domain.CategoryCompose">
+		<id property="code" column="category_code" />
+		<id property="type" column="type" />
+		<result property="count" column="count" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		code, name, score, time, pass_score
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+			exam_category_tbl.code,
+			exam_category_tbl.name,
+			exam_category_tbl.score,
+			exam_category_tbl.time,
+			exam_category_tbl.pass_score,
+			exam_category_compose_tbl.code as category_code,
+			exam_category_compose_tbl.type,
+			exam_category_compose_tbl.count
+		from exam_category_tbl 
+	   inner join exam_category_compose_tbl
+		  on exam_category_tbl.code = exam_category_compose_tbl.code
+		where exam_category_tbl.code = #{code,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from exam_category_tbl
+		where code = #{code,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="examsys.first.domain.Category">
+		insert into exam_category_tbl (code, name, score,
+		time, pass_score)
+		values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{score,jdbcType=INTEGER},
+		#{time,jdbcType=INTEGER}, #{passScore,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="examsys.first.domain.Category">
+		insert into exam_category_tbl
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="code != null">
+				code,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+			<if test="time != null">
+				time,
+			</if>
+			<if test="passScore != null">
+				pass_score,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=INTEGER},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=INTEGER},
+			</if>
+			<if test="passScore != null">
+				#{passScore,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="examsys.first.domain.Category">
+		update exam_category_tbl
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				score = #{score,jdbcType=INTEGER},
+			</if>
+			<if test="time != null">
+				time = #{time,jdbcType=INTEGER},
+			</if>
+			<if test="passScore != null">
+				pass_score = #{passScore,jdbcType=INTEGER},
+			</if>
+		</set>
+		where code = #{code,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="examsys.first.domain.Category">
+		update exam_category_tbl
+		set name = #{name,jdbcType=VARCHAR},
+		score = #{score,jdbcType=INTEGER},
+		time = #{time,jdbcType=INTEGER},
+		pass_score = #{passScore,jdbcType=INTEGER}
+		where code = #{code,jdbcType=VARCHAR}
+	</update>
+</mapper>

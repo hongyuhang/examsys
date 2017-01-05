@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="examsys.first.dao.ItemMapper">
+	<resultMap id="BaseResultMap" type="examsys.first.domain.Item">
+		<id column="item_id" property="itemId" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="item_contont" property="itemContont" jdbcType="VARCHAR" />
+		<result column="score" property="score" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="TINYINT" />
+		<result column="memo" property="memo" jdbcType="VARCHAR" />
+		<collection property="options" ofType="examsys.first.domain.Option"
+			javaType="ArrayList" resultMap="ComposeResultMap" />
+	</resultMap>
+
+	<resultMap id="ComposeResultMap" type="examsys.first.domain.Option">
+		<id property="optionId" column="option_id" />
+		<result property="optionContent" column="option_content" />
+		<result property="correctFlag" column="correct_flag" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		item_id, code, item_contont, score, type, memo
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from exam_item_tbl
+		where item_id = #{itemId,jdbcType=BIGINT}
+	</select>
+
+	<select id="getRandomItems" resultMap="BaseResultMap">
+		select 
+			temp.*
+			, option_id
+			, option_content
+			, correct_flag
+		from
+			(
+			select
+			<include refid="Base_Column_List" />
+			from exam_item_tbl
+			where type=#{type, jdbcType=TINYINT}
+			order by rand() * (select count(item_id) from exam_item_tbl)
+			limit #{count, jdbcType=INTEGER}
+			) temp
+		left join exam_option_tbl
+		  on exam_option_tbl.item_id = temp.item_id
+		order by 
+			temp.item_id
+			, mod(cast((rand() * 100) as SIGNED), 20)
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from exam_item_tbl
+		where item_id = #{itemId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="examsys.first.domain.Item">
+		insert into exam_item_tbl (item_id, code, item_contont,
+		score, type, memo)
+		values (#{itemId,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR},
+		#{itemContont,jdbcType=VARCHAR},
+		#{score,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{memo,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="examsys.first.domain.Item">
+		insert into exam_item_tbl
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="itemId != null">
+				item_id,
+			</if>
+			<if test="code != null">
+				code,
+			</if>
+			<if test="itemContont != null">
+				item_contont,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="memo != null">
+				memo,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="itemId != null">
+				#{itemId,jdbcType=BIGINT},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="itemContont != null">
+				#{itemContont,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=TINYINT},
+			</if>
+			<if test="memo != null">
+				#{memo,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="examsys.first.domain.Item">
+		update exam_item_tbl
+		<set>
+			<if test="code != null">
+				code = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="itemContont != null">
+				item_contont = #{itemContont,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				score = #{score,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=TINYINT},
+			</if>
+			<if test="memo != null">
+				memo = #{memo,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where item_id = #{itemId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="examsys.first.domain.Item">
+		update exam_item_tbl
+		set code = #{code,jdbcType=VARCHAR},
+		item_contont = #{itemContont,jdbcType=VARCHAR},
+		score = #{score,jdbcType=INTEGER},
+		type = #{type,jdbcType=TINYINT},
+		memo = #{memo,jdbcType=VARCHAR}
+		where item_id = #{itemId,jdbcType=BIGINT}
+	</update>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="examsys.first.dao.TestPaperMapper" >
+  <resultMap id="BaseResultMap" type="examsys.first.domain.TestPaper" >
+    <id column="testpaper_id" property="testpaperId" jdbcType="BIGINT" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="total_time" property="totalTime" jdbcType="INTEGER" />
+    <result column="spend_time" property="spendTime" jdbcType="INTEGER" />
+    <result column="total_score" property="totalScore" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="item_count" property="itemCount" jdbcType="INTEGER" />
+    <result column="pass_flag" property="passFlag" jdbcType="TINYINT" />
+    <result column="pass_score" property="passScore" jdbcType="INTEGER" />
+    <result column="test_datetime" property="testDatetime" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    testpaper_id, category_name, total_time, spend_time, total_score, score, item_count, 
+    pass_flag, pass_score, test_datetime, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from exam_testpaper_tbl
+    where testpaper_id = #{testpaperId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from exam_testpaper_tbl
+    where testpaper_id = #{testpaperId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="examsys.first.domain.TestPaper" >
+    insert into exam_testpaper_tbl (testpaper_id, category_name, total_time, 
+      spend_time, total_score, score, 
+      item_count, pass_flag, pass_score, 
+      test_datetime, user_id)
+    values (#{testpaperId,jdbcType=BIGINT}, #{categoryName,jdbcType=VARCHAR}, #{totalTime,jdbcType=INTEGER}, 
+      #{spendTime,jdbcType=INTEGER}, #{totalScore,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{itemCount,jdbcType=INTEGER}, #{passFlag,jdbcType=TINYINT}, #{passScore,jdbcType=INTEGER}, 
+      #{testDatetime,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="examsys.first.domain.TestPaper" >
+    insert into exam_testpaper_tbl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="testpaperId != null" >
+        testpaper_id,
+      </if>
+      <if test="categoryName != null" >
+        category_name,
+      </if>
+      <if test="totalTime != null" >
+        total_time,
+      </if>
+      <if test="spendTime != null" >
+        spend_time,
+      </if>
+      <if test="totalScore != null" >
+        total_score,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="itemCount != null" >
+        item_count,
+      </if>
+      <if test="passFlag != null" >
+        pass_flag,
+      </if>
+      <if test="passScore != null" >
+        pass_score,
+      </if>
+      <if test="testDatetime != null" >
+        test_datetime,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="testpaperId != null" >
+        #{testpaperId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryName != null" >
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalTime != null" >
+        #{totalTime,jdbcType=INTEGER},
+      </if>
+      <if test="spendTime != null" >
+        #{spendTime,jdbcType=INTEGER},
+      </if>
+      <if test="totalScore != null" >
+        #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="itemCount != null" >
+        #{itemCount,jdbcType=INTEGER},
+      </if>
+      <if test="passFlag != null" >
+        #{passFlag,jdbcType=TINYINT},
+      </if>
+      <if test="passScore != null" >
+        #{passScore,jdbcType=INTEGER},
+      </if>
+      <if test="testDatetime != null" >
+        #{testDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="examsys.first.domain.TestPaper" >
+    update exam_testpaper_tbl
+    <set >
+      <if test="categoryName != null" >
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalTime != null" >
+        total_time = #{totalTime,jdbcType=INTEGER},
+      </if>
+      <if test="spendTime != null" >
+        spend_time = #{spendTime,jdbcType=INTEGER},
+      </if>
+      <if test="totalScore != null" >
+        total_score = #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="itemCount != null" >
+        item_count = #{itemCount,jdbcType=INTEGER},
+      </if>
+      <if test="passFlag != null" >
+        pass_flag = #{passFlag,jdbcType=TINYINT},
+      </if>
+      <if test="passScore != null" >
+        pass_score = #{passScore,jdbcType=INTEGER},
+      </if>
+      <if test="testDatetime != null" >
+        test_datetime = #{testDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where testpaper_id = #{testpaperId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="examsys.first.domain.TestPaper" >
+    update exam_testpaper_tbl
+    set category_name = #{categoryName,jdbcType=VARCHAR},
+      total_time = #{totalTime,jdbcType=INTEGER},
+      spend_time = #{spendTime,jdbcType=INTEGER},
+      total_score = #{totalScore,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      item_count = #{itemCount,jdbcType=INTEGER},
+      pass_flag = #{passFlag,jdbcType=TINYINT},
+      pass_score = #{passScore,jdbcType=INTEGER},
+      test_datetime = #{testDatetime,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR}
+    where testpaper_id = #{testpaperId,jdbcType=BIGINT}
+  </update>
+</mapper>

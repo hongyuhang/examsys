@@ -22,8 +22,15 @@ public class CategoryController {
 	
 	@RequestMapping(value="/category/all")
 	public Object getAllCategory(HttpServletRequest request) {
-		List<Category> list = categoryService.getAllCatgory();
-		
-		return CommonUtils.getJsonObjs(false, list);
+		try {
+			List<Category> list = categoryService.getAllCatgory();
+			list.forEach(category -> {
+				category.setDescription("");
+			});
+			return CommonUtils.getJsonObjs(true, list);
+		} catch(Exception e) {
+			logger.error(e);
+			return CommonUtils.getJsonObjs(false, null);
+		}
 	}
 }

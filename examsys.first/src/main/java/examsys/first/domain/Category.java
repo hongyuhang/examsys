@@ -19,4 +19,15 @@ public class Category extends BaseInfo {
     
     private List<CategoryCompose>  composes;
     
+    private String description;
+    
+    public void setDescription(String description) {
+    	this.description = "考试时间：" + time + "分钟；考试总分数:" + score + "；合格分数：" + passScore;
+    }
+    
+    public String getDescription() {
+    	
+    	return description;
+    }
+    
 }

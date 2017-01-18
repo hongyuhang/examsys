@@ -49,7 +49,7 @@
 			exam_category_compose_tbl.type,
 			exam_category_compose_tbl.count
 		from exam_category_tbl 
-	   inner join exam_category_compose_tbl
+		left join exam_category_compose_tbl
 		  on exam_category_tbl.code = exam_category_compose_tbl.code
 	</select>
 	

@@ -28,68 +28,90 @@
 				border-style: solid;
 				border-color:#000000;
 			}*/
+			.vpad {margin-bottom: 4px;}
 		</style>
 	</head>
 	<body>
+		<div class="panel panel-default panel-info">
+		<div class="panel-heading">考试类别：XXX 
+		  共<span class="badge" style="background-color:#31B0D5;font-size: 13px;">XXX</span>道题,
+		  还有<span class="badge" style="background-color: #d9534f;font-size: 13px">XXX</span>道没回答
+		</div>
+  		<div class="panel-body">
 		<div class="container">
 			<!--
             	作者：hongyuhang@hotmail.com
             	时间：2017-01-17
             	描述：倒计时和考题总览区
             -->
-			<div class="row" style="min-height:100px;">
-				<!--
-                	作者：hongyuhang@hotmail.com
-                	时间：2017-01-17
-                	描述：倒计时区
-                -->
-				<div class="col-sm-4 col-md-4 col-lg-4">
-					<div class="digits"></div>
-				</div>
-				<!--
-                	作者：hongyuhang@hotmail.com
-                	时间：2017-01-17
-                	描述：考题总览区
-                -->
-				<div class="col-sm-8 col-md-8 col-lg-8" style="padding: 10px;">
-					<button type="button" class="btn btn-info btn-sm">
-						<span class="glyphicon glyphicon-ok-circle"></span> Q001
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q002
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q003
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q004
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q005
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q006
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q007
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q008
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q009
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q010
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q011
-					</button>
-					<button type="button" class="btn btn-warning btn-sm">
-						<span class="glyphicon glyphicon-remove-circle"></span> Q012
-					</button>
-					<!--<span class="badge">21</span>
-					<span class="badge">21</span>-->
+            <div class="row">
+	            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+				  <div class="panel panel-default">
+				    <div class="panel-heading" role="tab" id="headingOne">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				          答题情况
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+				      <div class="panel-body">
+						<!--
+		                	作者：hongyuhang@hotmail.com
+		                	时间：2017-01-17
+		                	描述：倒计时区
+		                -->
+						<div class="col-sm-4 col-md-4 col-lg-4">
+							<div class="digits"></div>
+						</div>
+						<!--
+		                	作者：hongyuhang@hotmail.com
+		                	时间：2017-01-17
+		                	描述：考题总览区
+		                -->
+						<div class="col-sm-8 col-md-8 col-lg-8" style="padding: 10px;">
+							<button type="button" class="btn btn-info btn-sm vpad">
+								<span class="glyphicon glyphicon-ok-circle"></span> Q001
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q002
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q003
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q004
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q005
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q006
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q007
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q008
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q009
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q010
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q011
+							</button>
+							<button type="button" class="btn btn-warning btn-sm vpad">
+								<span class="glyphicon glyphicon-remove-circle"></span> Q012
+							</button>
+							<!--<span class="badge">21</span>
+							<span class="badge">21</span>-->
+						</div>
+				      </div>
+				    </div>
+				  </div>
 				</div>
 			</div>
 			<!--
@@ -97,11 +119,41 @@
             	时间：2017-01-17
             	描述：考题内容区
             -->
-			<div class="row" style="min-height: 400px;border:solid;">
-				<div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-10 col-md-10 col-lg-10">
-					考题内容
+			<div class="row" style="min-height: 400px;">
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+				  <div class="panel panel-default">
+				    <div class="panel-heading" role="tab" id="headingOne">
+				      <h4 class="panel-title">
+				      	考试内容：
+				      </h4>
+				    </div>
+				    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+				      <div class="panel-body">
+				      	<div class="col-sm-1 col-md-1 col-lg-1" style="text-align: right;padding-right: 1px;">
+				      		<span class="badge" style="margin-right: 1px;background-color:#428bca">XXX</span>&nbsp;
+				      	</div>
+						<div class="col-sm-11 col-md-11 col-lg-11">
+							XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:
+							<br />
+							<ul class="list-group">
+							  <li class="list-group-item"><input name="aaa" type="radio"> A.XXXXXXXXXXXXXXXXX</input></li>
+							  <li class="list-group-item"><input name="aaa" type="radio" /> B.XXXXXXXXXXXXXXXXX</li>
+							  <li class="list-group-item"><input name="bbb" type="checkbox" /> C.XXXXXXXXXXXXXXXXX</li>
+							  <li class="list-group-item"><input name="ccc" type="checkbox" /> D.XXXXXXXXXXXXXXXXX</li>
+							</ul>
+			<div class="btn-group" style="float:right;">
+			    <button type="button" class="btn btn-default">前一题</button>
+			    <button type="button" class="btn btn-default">后一题</button>
+			</div>
+						</div>
+				      </div>
+				    </div>
+				  </div>
 				</div>
 			</div>
+
 		</div>
+		  </div>
+	</div>
 	</body>
 </html>

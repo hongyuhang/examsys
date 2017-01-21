@@ -202,12 +202,12 @@
                     <overwrite>true</overwrite>
                 </configuration>
                 <executions>
-                    <execution>
+                    <!-- <execution>
                         <id>Generate MyBatis Artifacts</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                    </execution>
+                    </execution> -->
                 </executions>
                 <dependencies>
                     <dependency>

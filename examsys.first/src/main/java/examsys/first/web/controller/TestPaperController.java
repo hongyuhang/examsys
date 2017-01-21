@@ -24,7 +24,7 @@ public class TestPaperController {
 	TestPaperService testPaperService;
 	
 	@RequestMapping(value="/testpaper/{categoryCode}")
-	public Object getRndTestPaper(@PathVariable("id") String categoryCode, HttpServletRequest request) {
+	public Object getRndTestPaper(@PathVariable("categoryCode") String categoryCode, HttpServletRequest request) {
 		Category category = categoryService.getCategory(categoryCode);
 		
 		if (category == null) {
@@ -32,7 +32,8 @@ public class TestPaperController {
 		}
 		
 		TestPaper paper = testPaperService.generateTestPaper(category);
-		return CommonUtils.getJsonObj(false, paper);
+		request.getSession(true).setAttribute("testPaper", paper);
+		return CommonUtils.getJsonObj(true, paper);
 	}
 	
 }

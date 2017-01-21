@@ -17,6 +17,11 @@
 	<mvc:resources location="/" mapping="/**/*.css" />
 	<mvc:resources location="/" mapping="/**/*.png" />
 	<mvc:resources location="/" mapping="/**/*.gif" />
+	<mvc:resources location="/" mapping="/**/*.eot" />
+	<mvc:resources location="/" mapping="/**/*.svg" />
+	<mvc:resources location="/" mapping="/**/*.woff" />
+	<mvc:resources location="/" mapping="/**/*.woff2" />
+	<mvc:resources location="/" mapping="/**/*.otf" />
 
 	<!-- 扫描控制器类 -->
 	<!-- 扫描服务，DAO，持久层 -->

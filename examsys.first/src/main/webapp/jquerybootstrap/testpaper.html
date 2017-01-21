@@ -29,6 +29,7 @@
 				border-color:#000000;
 			}*/
 			.vpad {margin-bottom: 4px;}
+			.vmar {margin-right: 4px;}
 		</style>
 	</head>
 	<body>
@@ -69,7 +70,7 @@
 		                	时间：2017-01-17
 		                	描述：考题总览区
 		                -->
-						<div class="col-sm-8 col-md-8 col-lg-8" style="padding: 10px;">
+						<div id="answerinfo" class="col-sm-8 col-md-8 col-lg-8" style="padding: 10px;">
 							<button type="button" class="btn btn-info btn-sm vpad">
 								<span class="glyphicon glyphicon-ok-circle"></span> Q001
 							</button>
@@ -130,21 +131,21 @@
 				    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 				      <div class="panel-body">
 				      	<div class="col-sm-1 col-md-1 col-lg-1" style="text-align: right;padding-right: 1px;">
-				      		<span class="badge" style="margin-right: 1px;background-color:#428bca">XXX</span>&nbsp;
+				      		<span id="questionIndex" class="badge" style="margin-right: 1px;background-color:#428bca">XXX</span>&nbsp;
 				      	</div>
 						<div class="col-sm-11 col-md-11 col-lg-11">
-							XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:
+							<span id="questionContent">XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:XXXXXXXXXXXXXXXXXXXXX?XXXXXXXXX:</span>
 							<br />
-							<ul class="list-group">
+							<ul id="options" class="list-group">
 							  <li class="list-group-item"><input name="aaa" type="radio"> A.XXXXXXXXXXXXXXXXX</input></li>
 							  <li class="list-group-item"><input name="aaa" type="radio" /> B.XXXXXXXXXXXXXXXXX</li>
 							  <li class="list-group-item"><input name="bbb" type="checkbox" /> C.XXXXXXXXXXXXXXXXX</li>
 							  <li class="list-group-item"><input name="ccc" type="checkbox" /> D.XXXXXXXXXXXXXXXXX</li>
 							</ul>
-			<div class="btn-group" style="float:right;">
-			    <button type="button" class="btn btn-default">前一题</button>
-			    <button type="button" class="btn btn-default">后一题</button>
-			</div>
+							<div class="btn-group" style="float:right;">
+							    <button id="preBtn" type="button" class="btn btn-default">前一题</button>
+							    <button id="nextBtn" type="button" class="btn btn-default">后一题</button>
+							</div>
 						</div>
 				      </div>
 				    </div>

@@ -191,9 +191,25 @@ function AnswerContents () {
 			}
 			// 多选
 			if (self.questions[self.currentIndex].qType == "2") {
-				option = $('<input name="option" type="checkbox" oid="' + obj.optionId + '"></input>');
-				option.click(function(){
-					
+				option = $('<input name="option" type="checkbox" value="' + obj.optionId + '"></input>');
+				option.change(function(){
+					if ($(this).is(':checked')) {
+						self.questions[self.currentIndex].selected.push(obj.optionId);
+						answersInfo.show(self.currentIndex, true);
+					} else {
+						if (self.questions[self.currentIndex].selected.indexOf(obj.optionId) >= 0) {
+							var temp = self.questions[self.currentIndex].selected;
+							self.questions[self.currentIndex].selected = [];
+							$.each(temp, function(j, ele){
+								if (ele != obj.optionId) {
+									self.questions[self.currentIndex].selected.push(ele);
+								}
+							});
+							if (self.questions[self.currentIndex].selected.length == 0) {
+								answersInfo.show(self.currentIndex, false);
+							}
+						}
+					}
 				});
 			}	
 			
@@ -209,6 +225,10 @@ function AnswerContents () {
 			$.each(self.questions[self.currentIndex].selected, function(j, value) {
 				$("input:radio[oid='" + value + "']").attr("checked",true);
 			});
+			
+			$.each(self.questions[self.currentIndex].selected, function(j, value) {
+				$("input:checkbox[value='" + value + "']").attr("checked",true);
+			});			
 		}
 	}
 	

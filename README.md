@@ -13,7 +13,7 @@
 3.考试结构分析页面，按照试题类型维度划分出饼图，显示正确和错误的比例。
   
 第一个版本：
-    后台：spring mvc，mysql，
+    后台：spring mvc，mybatis，spring cache
     前台：jquery，bootstrap
     状态：进行中
     

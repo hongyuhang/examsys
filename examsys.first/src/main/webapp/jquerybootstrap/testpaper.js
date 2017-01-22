@@ -2,9 +2,33 @@ var contents = {};
 var topTitle = {};
 var answersInfo = {};
 $( document ).ready(function(){
+	var url = window.location.href;
+	if (url.indexOf("?") < 0) {
+		alert("错误的参数，不能进行考试！");
+		window.history.back();
+	}
+	// 解析参数
+	var args = url.substr(url.indexOf("?") + 1).split("&");
+	if (args == null || args == undefined || args.length <= 0) {
+		alert("错误的参数，不能进行考试！");
+		window.history.back();
+	}
+	
+	var category = args[0].split("=");
+	if (category == null || category == undefined || category.length != 2) {
+		alert("错误的参数，不能进行考试！");
+		window.history.back();
+	}
+	
+	if (category[0] != "categoryCode") {
+		alert("错误的参数，不能进行考试！");
+		window.history.back();
+	}
+	var categoryCode = category[1];
+	
 	// 请求服务器
 	$.ajax({
-		url:serverContext + "/testpaper/01",
+		url:serverContext + "/testpaper/" + categoryCode,
 		dataType:"json",
 		async:false,
 		success:function(data) {
@@ -257,4 +281,3 @@ function Option () {
 	this.optionId = "";
 	this.optionContent = "";
 }
-

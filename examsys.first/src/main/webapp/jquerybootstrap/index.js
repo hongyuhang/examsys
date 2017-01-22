@@ -72,15 +72,18 @@ var CategoryObj = function() {
 			childDescription.html(jsonObj.description);
 //			var childLink = $("<p><a class=\"btn btn-default\" href=\"#\" role\"button\">开始 &raquo;</a></p>");
 //			childLink.find("a").attr("cCode", jsonObj.code);
+			thumbnailDiv.click(function(){
+				window.location.href = serverContext + "/jquerybootstrap/testpaper.html?categoryCode=" + jsonObj.code;
+			});
 			
 			thumbnailDiv.append(childImg);
 			thumbnailDiv.append(childTitle);
 			thumbnailDiv.append(childDescription);
 //			thumbnailDiv.append(childLink);
 		})
-		$('.thumbnail').click(function() {
-			alert("即将转向考试页面（敬请期待）");
-		});
+//		$('.thumbnail').click(function() {
+//			alert("即将转向考试页面（敬请期待）");
+//		});
 	}
 };
 

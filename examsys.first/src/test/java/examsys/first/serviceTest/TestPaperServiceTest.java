@@ -28,13 +28,13 @@ public class TestPaperServiceTest extends AbstractBaseServiceTest {
 	
 	@Test
 	public void testgenerateTestPaperParamNull() {
-		TestPaper testPaper = service.generateTestPaper(null);
+		TestPaper testPaper = service.generateTestPaper(null, null);
 		assertNull(testPaper);
 	}
 	
 	@Test
 	public void testgenerateTestPaperNormal() {
-		TestPaper testPaper = service.generateTestPaper(category);
+		TestPaper testPaper = service.generateTestPaper(category, "testUserId");
 		assertNotNull(testPaper);
 		assertEquals(testPaper.getTestContent().size(), 3);
 		

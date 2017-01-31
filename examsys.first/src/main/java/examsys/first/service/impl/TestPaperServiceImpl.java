@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
-import ch.qos.logback.classic.Logger;
 import examsys.first.dao.ItemMapper;
 import examsys.first.domain.Category;
 import examsys.first.domain.Item;
@@ -20,9 +20,10 @@ public class TestPaperServiceImpl implements TestPaperService {
 	private ItemMapper itemMapper;
 	
 	/**
-	 * 根据考试类型随机生成一张试卷
+	 * 根据考试类型随机生成一张试卷,并将userid作为key，放到缓存里
 	 */
-	public TestPaper generateTestPaper(Category category) {
+	@CachePut(value="examCache", key="#userId")
+	public TestPaper generateTestPaper(Category category, String userId) {
 		TestPaper paper = new TestPaper();
 		paper.setTestContent(new HashMap<Integer, List<Item>>());
 		if (category == null)

@@ -25,7 +25,7 @@
 
 	<!-- 扫描控制器类 -->
 	<!-- 扫描服务，DAO，持久层 -->
-	<context:component-scan base-package="examsys.first">
+	<context:component-scan base-package="examsys.first" use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>

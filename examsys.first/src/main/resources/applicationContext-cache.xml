@@ -14,13 +14,13 @@
 	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
      <property name="caches"> 
        <set> 
-         <bean 
+          
+         <!--<bean 
            class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-           p:name="default" /> 
+           p:name="examCache" />-->  
+         
         
-         <bean 
-           class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-           p:name="examCache" /> 
+         <bean parent="parentCacheFactoryBean" p:name="examCache" />
          <bean parent="parentCacheFactoryBean" p:name="attributes"/>
          <bean parent="parentCacheFactoryBean" p:name="history"/>
          <bean parent="parentCacheFactoryBean" p:name="actions" p:maxSize="100"/>

@@ -9,5 +9,5 @@ public interface TestPaperService {
 	 * @param category	考试类型
 	 * @return
 	 */
-	public TestPaper generateTestPaper(Category category);
+	public TestPaper generateTestPaper(Category category, String userId);
 }

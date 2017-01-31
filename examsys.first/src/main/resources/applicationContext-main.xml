@@ -22,4 +22,7 @@
 	</context:component-scan>
 
 	<!-- <context:component-scan base-package="examsys.first" /> -->
+	    <!-- Spring中引入其他配置文件 -->
+	<import resource="classpath*:applicationContext-cache.xml" />
+	<import resource="classpath*:applicationContext-mybatis.xml" />
 </beans>

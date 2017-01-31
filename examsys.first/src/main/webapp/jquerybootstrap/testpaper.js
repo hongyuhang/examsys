@@ -26,6 +26,26 @@ $( document ).ready(function(){
 	}
 	var categoryCode = category[1];
 	
+	$('#completeTest').click(function(){
+		// TODO:应该加入confirm
+	// 请求服务器
+	$.ajax({
+		url:serverContext + "/testpaper/complete",
+		dataType:"json",
+		async:false,
+		success:function(data) {
+			if (data.flag) {
+				alert("交卷成功!");
+			} else {
+				alert("服务器出现错误!");
+			}
+		},
+		error:function(){
+			alert("服务器出现错误!");
+		}
+	});
+	});
+	
 	// 请求服务器
 	$.ajax({
 		url:serverContext + "/testpaper/" + categoryCode,

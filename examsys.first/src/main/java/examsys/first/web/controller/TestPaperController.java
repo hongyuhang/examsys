@@ -38,6 +38,7 @@ public class TestPaperController {
 			logger.warn("考试类别ID为NULL");
 			return CommonUtils.getJsonObj(false, null);
 		}
+		request.getSession(true).setAttribute("userId", "ABCDE");
 		// 因为暂时没有用户ID，所以用sessionid来代替userid
 		TestPaper paper = testPaperService.generateTestPaper(category, request.getRequestedSessionId());
 		request.getSession(true).setAttribute("testPaper", paper);

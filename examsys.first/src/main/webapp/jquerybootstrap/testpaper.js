@@ -58,7 +58,19 @@ $( document ).ready(function(){
 				contents.show();
 				
 				topTitle = new TopTitle();
-				topTitle.noAnswerCount = contents.questions.length;
+				
+				// 设置考试类别名称
+				$('#categoryName').html(data.data.categoryName);
+				var totalItems = 0;
+				for(key in data.data.testContent) {
+					totalItems = totalItems + data.data.testContent[key].length;
+				}
+				// 设置总考题数量
+				$('#totalItems').html(totalItems);
+				$('#leftItems').html(totalItems);
+				// 设置考试总时间
+				topTitle.times = data.data.totalTime;
+				topTitle.noAnswerCount = totalItems;
 				
 				answersInfo = new AnswersInfo();
 				answersInfo.showAll(contents);
@@ -77,7 +89,7 @@ $( document ).ready(function(){
       image: "img/digits.png",
       format: "mm:ss",
 	    stepTime: 60,
-	    startTime: "30:00", // 需要修改为从服务器读取应该的倒计时数字
+	    startTime: topTitle.times + ":00", // 需要修改为从服务器读取应该的倒计时数字
 	    digitImages: 6,
 	    digitWidth: 67,
 	    digitHeight: 90,
@@ -94,6 +106,12 @@ $( document ).ready(function(){
 TopTitle = function() {
 	this.answerCount = 0 ;
 	this.noAnswerCount = 0;
+	this.times = 30;
+	var self = this;
+	
+	this.refresh = function() {
+		$('#leftItems').html(self.noAnswerCount);
+	}
 }
 
 /**
@@ -104,10 +122,19 @@ AnswersInfo = function() {
 	this.infos = [];
 	
 	this.show = function(index, selected) {
+		var classes = self.infos[index].attr("class").split(" ");
 		if (selected) {
+			if ($.inArray("btn-warning", classes) >= 0) {
+				topTitle.noAnswerCount--;
+				topTitle.refresh();
+			}
 			self.infos[index].removeClass("btn-warning");
 			self.infos[index].addClass("btn-info");
 		} else {
+			if ($.inArray("btn-info", classes) >= 0) {
+				topTitle.noAnswerCount++;
+				topTitle.refresh();
+			}
 			self.infos[index].removeClass("btn-info");
 			self.infos[index].addClass("btn-warning");
 		}

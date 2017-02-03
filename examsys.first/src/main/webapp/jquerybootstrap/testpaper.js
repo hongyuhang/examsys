@@ -4,38 +4,57 @@ var answersInfo = {};
 $( document ).ready(function(){
 	var url = window.location.href;
 	if (url.indexOf("?") < 0) {
-		alert("错误的参数，不能进行考试！");
+		$.alert({
+		    title: '错误提示',
+		    content: '错误的参数，不能进行考试！',
+		});
 		window.history.back();
 	}
 	// 解析参数
 	var args = url.substr(url.indexOf("?") + 1).split("&");
 	if (args == null || args == undefined || args.length <= 0) {
-		alert("错误的参数，不能进行考试！");
+		$.alert({
+		    title: '错误提示',
+		    content: '错误的参数，不能进行考试！',
+		});
 		window.history.back();
 	}
 	
 	var category = args[0].split("=");
 	if (category == null || category == undefined || category.length != 2) {
-		alert("错误的参数，不能进行考试！");
+		$.alert({
+		    title: '错误提示',
+		    content: '错误的参数，不能进行考试！',
+		});
 		window.history.back();
 	}
 	
 	if (category[0] != "categoryCode") {
-		alert("错误的参数，不能进行考试！");
+		$.alert({
+		    title: '错误提示',
+		    content: '错误的参数，不能进行考试！',
+		});
 		window.history.back();
 	}
 	var categoryCode = category[1];
 	// TODO:应该去掉浏览器的地址栏，并禁用右键。
 	
-	
 	$('#completeTest').click(function(){
 		// 如果没有答完试题，弹出提示问是否提交
 		if (topTitle.noAnswerCount > 0) {
-			// TODO:应该加入confirm
-			alert('还未打完试卷');
-//			return;
+			$.confirm({
+			    title: '提示',
+			    content: '试卷没有全部答完，确认要交卷吗？',
+			    buttons: {
+			        交卷: function () {
+			            submitTestPaper();
+			        },
+			        取消: function () {
+			            return;
+			        }
+			    }
+			});
 		}
-		submitTestPaper();
 	});
 	
 	// 请求服务器
@@ -69,11 +88,17 @@ $( document ).ready(function(){
 				
 				console.log(contents.questions);
 			} else {
-				alert("服务器出现错误!");
+				$.alert({
+				    title: '错误提示',
+				    content: '服务器出现错误!',
+				});
 			}
 		},
 		error:function(){
-			alert("服务器出现错误!");
+			$.alert({
+			    title: '错误提示',
+			    content: '服务器出现错误!',
+			});
 		}
 	});
 	
@@ -89,7 +114,6 @@ $( document ).ready(function(){
 	    continuous: false,
 		start: true
     });
-    
 });
 
 /**
@@ -294,8 +318,6 @@ function AnswerContents () {
 			});			
 		}
 	}
-	
-	
 }
 
 /**
@@ -346,18 +368,26 @@ function submitTestPaper() {
 		url:serverContext + "/testpaper/complete",
 		dataType:"json",
 		data:JSON.stringify(postData),
-//		async:false,
 		method:"post",
 		contentType:"application/json",
 		success:function(data) {
 			if (data.flag) {
-				alert("交卷成功!");
+				$.alert({
+				    title: '提示',
+				    content: '交卷成功!可以马上前往<a href="#">这里</a>确认考试成绩，或者稍后再确认。',
+				});
 			} else {
-				alert("服务器出现错误!");
+				$.alert({
+				    title: '错误提示',
+				    content: '服务器出现错误!',
+				});
 			}
 		},
 		error:function(){
-			alert("服务器出现错误!");
+			$.alert({
+			    title: '错误提示',
+			    content: '服务器出现错误!',
+			});
 		}
 	});
 }

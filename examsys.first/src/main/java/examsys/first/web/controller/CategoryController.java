@@ -23,6 +23,7 @@ public class CategoryController {
 	@RequestMapping(value="/category/all")
 	public Object getAllCategory(HttpServletRequest request) {
 		try {
+			request.getSession(true).setAttribute("userId", "ABCDE");
 			List<Category> list = categoryService.getAllCatgory();
 			list.forEach(category -> {
 				category.setDescription("");

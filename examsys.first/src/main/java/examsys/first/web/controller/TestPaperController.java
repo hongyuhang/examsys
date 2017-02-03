@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import examsys.first.common.CommonUtils;
 import examsys.first.domain.Category;
 import examsys.first.domain.TestPaper;
+import examsys.first.pageParam.TestPaperParam;
 import examsys.first.service.CategoryService;
 import examsys.first.service.TestPaperService;
 
@@ -48,12 +49,14 @@ public class TestPaperController {
 	
 	// 可以考虑在service层用spring异步处理来实现考试成绩的计算逻辑
 	@RequestMapping(value="/testpaper/complete")
-	public Object submitTestPaper(@RequestBody Object obj, HttpServletRequest request) {
-		CacheManager cacheManager = (CacheManager)CommonUtils.getContextBean("cacheManager");
-		Object cache = cacheManager.getCache("examCache");
-		logger.info(cache);
-		logger.info(obj);
+	public Object submitTestPaper(@RequestBody TestPaperParam param, HttpServletRequest request) {
+		logger.info(param);
+		logger.info(Thread.currentThread().getId());
+		
+		// 异步调用服务，计算考试成绩
+		testPaperService.calculateTestScoreAndSave(param);
+		
 		// 从缓存里取出试题
-		return cache;
+		return CommonUtils.getJsonObj(true, null);
 	}
 }

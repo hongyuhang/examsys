@@ -2,6 +2,7 @@ package examsys.first.service;
 
 import examsys.first.domain.Category;
 import examsys.first.domain.TestPaper;
+import examsys.first.pageParam.TestPaperParam;
 
 public interface TestPaperService {
 	/**
@@ -10,4 +11,10 @@ public interface TestPaperService {
 	 * @return
 	 */
 	public TestPaper generateTestPaper(Category category, String userId);
+	
+	/**
+	 * 计算考试成绩并保存
+	 * @param param
+	 */
+	public void calculateTestScoreAndSave(TestPaperParam param);
 }

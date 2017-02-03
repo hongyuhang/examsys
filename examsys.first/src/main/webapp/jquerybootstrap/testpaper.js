@@ -25,25 +25,17 @@ $( document ).ready(function(){
 		window.history.back();
 	}
 	var categoryCode = category[1];
+	// TODO:应该去掉浏览器的地址栏，并禁用右键。
+	
 	
 	$('#completeTest').click(function(){
-		// TODO:应该加入confirm
-	// 请求服务器
-	$.ajax({
-		url:serverContext + "/testpaper/complete",
-		dataType:"json",
-		async:false,
-		success:function(data) {
-			if (data.flag) {
-				alert("交卷成功!");
-			} else {
-				alert("服务器出现错误!");
-			}
-		},
-		error:function(){
-			alert("服务器出现错误!");
+		// 如果没有答完试题，弹出提示问是否提交
+		if (topTitle.noAnswerCount > 0) {
+			// TODO:应该加入confirm
+			alert('还未打完试卷');
+//			return;
 		}
-	});
+		submitTestPaper();
 	});
 	
 	// 请求服务器
@@ -93,7 +85,7 @@ $( document ).ready(function(){
 	    digitImages: 6,
 	    digitWidth: 67,
 	    digitHeight: 90,
-	    timerEnd: function(){alert("考试结束")},
+	    timerEnd: submitTestPaper,
 	    continuous: false,
 		start: true
     });
@@ -327,4 +319,45 @@ function Question () {
 function Option () {
 	this.optionId = "";
 	this.optionContent = "";
+}
+
+// 提交考卷函数
+function submitTestPaper() {
+	console.log(contents);
+	console.log(answersInfo);
+	// 冻结时间显示
+	$(".digits").stopCTimer();
+	// 发送contents中的questions到后台
+	var postData = {};
+	var paramArray = [];
+	$.each(contents.questions, function(i, obj) {
+		var param = {};
+		param.questionCode = obj.questionCode;
+		param.selected = obj.selected;
+		param.qType = obj.qType;
+		param.index = obj.index;
+		paramArray.push(param);
+	});
+	
+	postData.spendSeconds = spendSeconds;
+	postData.questions = paramArray;
+	// 请求服务器
+	$.ajax({
+		url:serverContext + "/testpaper/complete",
+		dataType:"json",
+		data:JSON.stringify(postData),
+//		async:false,
+		method:"post",
+		contentType:"application/json",
+		success:function(data) {
+			if (data.flag) {
+				alert("交卷成功!");
+			} else {
+				alert("服务器出现错误!");
+			}
+		},
+		error:function(){
+			alert("服务器出现错误!");
+		}
+	});
 }

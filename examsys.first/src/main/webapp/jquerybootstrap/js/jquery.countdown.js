@@ -187,13 +187,22 @@ var formatCompute = function(d, options) {
 // add leading zeros
 var pad = function(x){return (1e15+""+x).slice(-2)};
 
+var spendSeconds = 0;
+
 var start = function (element) {
 	if (element.attr('started') != 'true') {	
 		element.attr('started', true)
 		intervals.main = setInterval(function () {
+				spendSeconds++;
 				moveDigit(digits.length - 1, element.data('options'));
 			},
 			1000);
+	}
+};
+
+var stop = function () {
+	if (intervals.main) {
+		clearInterval(intervals.main);
 	}
 };
 
@@ -240,4 +249,9 @@ jQuery.fn.countdown = function(userOptions) {
 // start the counter
 jQuery.fn.start = function () {
 	start(this);
+};
+
+// stop the counter
+jQuery.fn.stopCTimer = function () {
+	stop();
 };

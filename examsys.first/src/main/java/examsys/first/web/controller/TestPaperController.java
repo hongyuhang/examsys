@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,12 +46,13 @@ public class TestPaperController {
 		return CommonUtils.getJsonObj(true, paper);
 	}
 	
-	// 可以考虑用spring异步处理来实现考试成绩的计算逻辑
+	// 可以考虑在service层用spring异步处理来实现考试成绩的计算逻辑
 	@RequestMapping(value="/testpaper/complete")
-	public Object submitTestPaper(HttpServletRequest request) {
+	public Object submitTestPaper(@RequestBody Object obj, HttpServletRequest request) {
 		CacheManager cacheManager = (CacheManager)CommonUtils.getContextBean("cacheManager");
 		Object cache = cacheManager.getCache("examCache");
 		logger.info(cache);
+		logger.info(obj);
 		// 从缓存里取出试题
 		return cache;
 	}

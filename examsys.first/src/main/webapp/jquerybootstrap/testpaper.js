@@ -54,6 +54,8 @@ $( document ).ready(function(){
 			        }
 			    }
 			});
+		} else {
+			submitTestPaper();
 		}
 	});
 	

@@ -211,12 +211,16 @@ function AnswerContents () {
 				question.questionCode = json.itemId;
 				question.questionContent = json.itemContont;
 				question.score = json.score;
-				$.each(json.options, function(j, obj) {
-					var option = new Option();
-					option.optionId = obj.optionId;
-					option.optionContent = obj.optionContent;
-					question.options.push(option);
-				});
+				
+				// 非判断题的情况
+				if (question.qType != 3) {
+					$.each(json.options, function(j, obj) {
+						var option = new Option();
+						option.optionId = obj.optionId;
+						option.optionContent = obj.optionContent;
+						question.options.push(option);
+					});
+				}
 				// 判断题的情况
 				if (question.qType == 3) {
 					var right = new Option();
@@ -356,7 +360,7 @@ function submitTestPaper() {
 		var param = {};
 		param.questionCode = obj.questionCode;
 		param.selected = obj.selected;
-		param.qType = obj.qType;
+		param.questionType = obj.qType;
 		param.index = obj.index;
 		paramArray.push(param);
 	});

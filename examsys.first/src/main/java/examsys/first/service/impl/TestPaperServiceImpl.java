@@ -155,8 +155,9 @@ public class TestPaperServiceImpl implements TestPaperService {
 					if (qParam.getSelected() == null || qParam.getSelected().isEmpty()) {
 						break;
 					}
-					// 非判断题的情况
-					if (answers.containsAll(qParam.getSelected())) {
+
+					if (answers.size() == qParam.getSelected().size() 
+							&& answers.containsAll(qParam.getSelected())) {
 						finalScore = finalScore + tempScore[0];
 						question.setCorrectFlag(1);
 					}

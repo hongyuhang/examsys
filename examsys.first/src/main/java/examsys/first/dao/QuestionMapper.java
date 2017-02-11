@@ -1,5 +1,7 @@
 package examsys.first.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import examsys.first.domain.Question;
 
 public interface QuestionMapper {
@@ -14,4 +16,7 @@ public interface QuestionMapper {
     int updateByPrimaryKeySelective(Question record);
 
     int updateByPrimaryKey(Question record);
+    
+    long getIdByTestPaperIdAndSeq(@Param("testPaperId")Long testPaperId, @Param("seq")Integer seq);
+    
 }

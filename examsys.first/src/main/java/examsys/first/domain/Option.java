@@ -12,5 +12,5 @@ public class Option extends BaseInfo  {
 
     private String optionContent;
 
-    private Byte correctFlag;
+    private Integer correctFlag;
 }

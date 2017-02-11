@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class QuestionParam {
 	private int index;
-	private String qType;
+	private String questionType;
 	private String questionCode;
 	private List<String> selected;
 }

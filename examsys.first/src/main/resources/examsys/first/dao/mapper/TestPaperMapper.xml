@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="examsys.first.domain.TestPaper" >
     <id column="testpaper_id" property="testpaperId" jdbcType="BIGINT" />
     <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="total_time" property="totalTime" jdbcType="INTEGER" />
     <result column="spend_time" property="spendTime" jdbcType="INTEGER" />
     <result column="total_score" property="totalScore" jdbcType="INTEGER" />
@@ -15,7 +16,7 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    testpaper_id, category_name, total_time, spend_time, total_score, score, item_count, 
+    testpaper_id, category_name, code, total_time, spend_time, total_score, score, item_count, 
     pass_flag, pass_score, test_datetime, user_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -29,11 +30,11 @@
     where testpaper_id = #{testpaperId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="examsys.first.domain.TestPaper" >
-    insert into exam_testpaper_tbl (testpaper_id, category_name, total_time, 
+    insert into exam_testpaper_tbl (testpaper_id, category_name, code, total_time, 
       spend_time, total_score, score, 
       item_count, pass_flag, pass_score, 
       test_datetime, user_id)
-    values (#{testpaperId,jdbcType=BIGINT}, #{categoryName,jdbcType=VARCHAR}, #{totalTime,jdbcType=INTEGER}, 
+    values (#{testpaperId,jdbcType=BIGINT}, #{categoryName,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{totalTime,jdbcType=INTEGER}, 
       #{spendTime,jdbcType=INTEGER}, #{totalScore,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
       #{itemCount,jdbcType=INTEGER}, #{passFlag,jdbcType=TINYINT}, #{passScore,jdbcType=INTEGER}, 
       #{testDatetime,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})
@@ -46,6 +47,9 @@
       </if>
       <if test="categoryName != null" >
         category_name,
+      </if>
+      <if test="code != null" >
+        code,
       </if>
       <if test="totalTime != null" >
         total_time,
@@ -82,6 +86,9 @@
       <if test="categoryName != null" >
         #{categoryName,jdbcType=VARCHAR},
       </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
       <if test="totalTime != null" >
         #{totalTime,jdbcType=INTEGER},
       </if>
@@ -117,6 +124,9 @@
       <if test="categoryName != null" >
         category_name = #{categoryName,jdbcType=VARCHAR},
       </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
       <if test="totalTime != null" >
         total_time = #{totalTime,jdbcType=INTEGER},
       </if>
@@ -150,6 +160,7 @@
   <update id="updateByPrimaryKey" parameterType="examsys.first.domain.TestPaper" >
     update exam_testpaper_tbl
     set category_name = #{categoryName,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
       total_time = #{totalTime,jdbcType=INTEGER},
       spend_time = #{spendTime,jdbcType=INTEGER},
       total_score = #{totalScore,jdbcType=INTEGER},
@@ -161,4 +172,9 @@
       user_id = #{userId,jdbcType=VARCHAR}
     where testpaper_id = #{testpaperId,jdbcType=BIGINT}
   </update>
+  <select id="getIdByUserIdAndCName" resultType="java.lang.Long">
+  	select testpaper_id from exam_testpaper_tbl 
+  	where user_id = #{userId,jdbcType=VARCHAR}
+  	  and category_name = #{categoryName,jdbcType=VARCHAR}
+  </select>
 </mapper>

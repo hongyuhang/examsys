@@ -1,5 +1,7 @@
 package examsys.first.domain;
 
+import java.util.List;
+
 public class Question extends BaseInfo  {
     private Long questionId;
 
@@ -9,7 +11,9 @@ public class Question extends BaseInfo  {
 
     private Integer seq;
 
-    private Byte correctFlag;
+    private Integer correctFlag;
+    
+    private List<Answer> answers;
 
     public Long getQuestionId() {
         return questionId;
@@ -43,11 +47,21 @@ public class Question extends BaseInfo  {
         this.seq = seq;
     }
 
-    public Byte getCorrectFlag() {
+    public Integer getCorrectFlag() {
         return correctFlag;
     }
 
-    public void setCorrectFlag(Byte correctFlag) {
+    public void setCorrectFlag(Integer correctFlag) {
         this.correctFlag = correctFlag;
     }
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+    
+    
 }

@@ -90,4 +90,9 @@
       correct_flag = #{correctFlag,jdbcType=TINYINT}
     where question_id = #{questionId,jdbcType=BIGINT}
   </update>
+  <select id="getIdByTestPaperIdAndSeq" resultType="java.lang.Long">
+  	select question_id from exam_question_tbl
+  	where testpaper_id = #{testPaperId,jdbcType=BIGINT}
+  	  and seq = #{seq,jdbcType=INTEGER}
+  </select>
 </mapper>

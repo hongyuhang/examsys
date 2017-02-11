@@ -7,9 +7,9 @@ public class Answer extends BaseInfo  {
 
     private String answerContent;
 
-    private Byte selected;
+    private Integer selected;
 
-    private Byte correctFlag;
+    private Integer correctFlag;
 
     public Long getAnswerId() {
         return answerId;
@@ -35,19 +35,19 @@ public class Answer extends BaseInfo  {
         this.answerContent = answerContent == null ? null : answerContent.trim();
     }
 
-    public Byte getSelected() {
+    public Integer getSelected() {
         return selected;
     }
 
-    public void setSelected(Byte selected) {
+    public void setSelected(Integer selected) {
         this.selected = selected;
     }
 
-    public Byte getCorrectFlag() {
+    public Integer getCorrectFlag() {
         return correctFlag;
     }
 
-    public void setCorrectFlag(Byte correctFlag) {
+    public void setCorrectFlag(Integer correctFlag) {
         this.correctFlag = correctFlag;
     }
 }

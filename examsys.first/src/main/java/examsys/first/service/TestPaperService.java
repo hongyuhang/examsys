@@ -16,5 +16,5 @@ public interface TestPaperService {
 	 * 计算考试成绩并保存
 	 * @param param
 	 */
-	public void calculateTestScoreAndSave(TestPaperParam param);
+	public void saveTestScore(TestPaperParam param, String userId);
 }

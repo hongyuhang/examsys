@@ -62,6 +62,7 @@ CREATE TABLE `exam_question_tbl` (
 CREATE TABLE `exam_testpaper_tbl` (
   `testpaper_id` bigint(10) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(100) NOT NULL,
+  `code` varchar(10) DEFAULT NULL,
   `total_time` int(11) DEFAULT NULL,
   `spend_time` int(11) DEFAULT NULL,
   `total_score` int(11) DEFAULT NULL,
@@ -72,4 +73,4 @@ CREATE TABLE `exam_testpaper_tbl` (
   `test_datetime` varchar(45) DEFAULT NULL,
   `user_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`testpaper_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='考卷表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='考卷表';

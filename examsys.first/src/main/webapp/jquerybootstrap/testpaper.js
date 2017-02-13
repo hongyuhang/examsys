@@ -369,6 +369,7 @@ function submitTestPaper() {
 	
 	postData.spendSeconds = spendSeconds;
 	postData.questions = paramArray;
+	
 	// 请求服务器
 	$.ajax({
 		url:serverContext + "/testpaper/complete",
@@ -378,9 +379,10 @@ function submitTestPaper() {
 		contentType:"application/json",
 		success:function(data) {
 			if (data.flag) {
+				var url = serverContext + "/gradeInfo.html?code=" + data.data.categoryCode + "&userId=" + data.data.userId;
 				$.alert({
 				    title: '提示',
-				    content: '交卷成功!可以马上前往<a href="#">这里</a>确认考试成绩，或者稍后再确认。',
+				    content: '交卷成功!可以马上前往<a href="' + url + '">这里</a>确认考试成绩，或者稍后再确认。',
 				});
 			} else {
 				$.alert({

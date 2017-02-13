@@ -22,6 +22,13 @@ public class CommonUtils {
 		return jsonOjb;
 	}
 	
+	public static Map<String, Object> getJsonMapObj(boolean flag, Map<String, Object> data) {
+		Map jsonOjb = new HashMap<String, Object>();
+		jsonOjb.put("flag", flag);
+		jsonOjb.put("data", data);
+		return jsonOjb;
+	}
+	
 	public static Map<String, Object> getJsonObjs(boolean flag, Collection data) {
 		Map jsonOjb = new HashMap<String, Object>();
 		jsonOjb.put("flag", flag);

@@ -1,9 +1,13 @@
 package examsys.first.web.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +54,15 @@ public class TestPaperController {
 		// 异步调用服务，计算考试成绩
 		testPaperService.saveTestScore(param, request.getRequestedSessionId());
 		
+		// 取出缓存
+		CacheManager cacheManager = (CacheManager)CommonUtils.getContextBean("cacheManager");
+		TestPaper cache = (TestPaper)cacheManager.getCache("examCache").get(request.getRequestedSessionId()).get();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryCode", cache.getCode());
+		map.put("userId", request.getRequestedSessionId());
+		
 		// 从缓存里取出试题
-		return CommonUtils.getJsonObj(true, null);
+		return CommonUtils.getJsonMapObj(true, map);
 	}
 }

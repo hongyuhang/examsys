@@ -15,7 +15,7 @@
 第一个版本：
     后台：spring mvc，mybatis，spring cache
     前台：jquery，bootstrap, eCharts
-    状态：进行中
+    状态：初版完成
     
 第二个版本：
     后台：使用 websocket实现，其他不变
@@ -23,4 +23,9 @@
     状态：未开始
     
 第三个版本：
-	使用dubbo来进行异步远程rpc调用，用mangoDB记录每次提交试卷的状态
+	使用dubbo来进行异步远程rpc调用，用mangoDB记录每次提交试卷的状态,
+	状态：未开始
+
+第四个版本：
+	前端使用Vue2重新实现一遍
+	状态：未开始

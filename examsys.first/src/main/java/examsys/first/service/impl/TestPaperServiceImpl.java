@@ -101,7 +101,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 		for(QuestionParam qParam : param.getQuestions()) {
 			Question question = new Question();
 			question.setSeq(qParam.getIndex());
-			question.setQuestionId(Long.parseLong(qParam.getQuestionCode()));
+//			question.setQuestionId(Long.parseLong(qParam.getQuestionCode()));
 			
 			// 根据考题类型取得缓存中的正确答案，和回答进行对比
 			List<String> answers = new ArrayList<String>();
@@ -109,6 +109,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 			logger.info(cache.getTestContent().get(qParam.getQuestionType()));
 			for(Item item : cache.getTestContent().get(Integer.parseInt(qParam.getQuestionType()))) {
 				if (item.getItemId() ==Long.parseLong(qParam.getQuestionCode())) {
+					question.setQuestionType(Integer.parseInt(qParam.getQuestionType()));
 					question.setQuestionContent(item.getItemContont());
 					question.setCorrectFlag(0);
 					
@@ -224,6 +225,11 @@ public class TestPaperServiceImpl implements TestPaperService {
 		testPaper.setUserId(userId);
 		
 		return testPaper;
+	}
+
+	@Override
+	public TestPaper getGrade(String categoryCode, String userId) {	
+		return testPaperMapper.getGrade(userId, categoryCode);
 	}
 
 }

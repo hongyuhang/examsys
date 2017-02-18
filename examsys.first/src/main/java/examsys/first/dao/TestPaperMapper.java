@@ -19,4 +19,5 @@ public interface TestPaperMapper {
     
     long getIdByUserIdAndCName(@Param("userId")String userId, @Param("categoryName")String categoryName);
     
+    TestPaper getGrade(@Param("userId")String userId, @Param("categoryCode")String categoryCode);
 }

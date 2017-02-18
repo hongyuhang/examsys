@@ -15,6 +15,33 @@
     <result column="test_datetime" property="testDatetime" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <resultMap id="GradeResultMap" type="examsys.first.domain.TestPaper" >
+    <id column="testpaper_id" property="testpaperId" jdbcType="BIGINT" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="total_time" property="totalTime" jdbcType="INTEGER" />
+    <result column="spend_time" property="spendTime" jdbcType="INTEGER" />
+    <result column="total_score" property="totalScore" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="item_count" property="itemCount" jdbcType="INTEGER" />
+    <result column="pass_flag" property="passFlag" jdbcType="TINYINT" />
+    <result column="pass_score" property="passScore" jdbcType="INTEGER" />
+    <result column="test_datetime" property="testDatetime" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<collection property="questions" ofType="examsys.first.domain.QuestionType"
+			javaType="ArrayList" resultMap="QuestTypeResultMap" />
+	</resultMap>
+
+	<resultMap id="QuestTypeResultMap" type="examsys.first.domain.QuestionType">
+		<id property="testpaperId" column="testpaper_id" />
+		<id property="code" column="question_type" />
+		<id property="correctFlag" column="correct_flag" />
+		
+		<result property="qCount" column="qCount" />
+
+	</resultMap>
+  
   <sql id="Base_Column_List" >
     testpaper_id, category_name, code, total_time, spend_time, total_score, score, item_count, 
     pass_flag, pass_score, test_datetime, user_id
@@ -25,6 +52,32 @@
     from exam_testpaper_tbl
     where testpaper_id = #{testpaperId,jdbcType=BIGINT}
   </select>
+  
+  <select id="getGrade" resultMap="GradeResultMap">
+    select 
+    	 exam_question_tbl.testpaper_id
+    	,exam_testpaper_tbl.category_name
+    	,exam_testpaper_tbl.total_score
+    	,exam_testpaper_tbl.score
+    	,exam_testpaper_tbl.pass_flag
+    	,exam_question_tbl.question_type
+    	,exam_question_tbl.correct_flag
+    	,count(exam_question_tbl.testpaper_id) as qCount
+    from exam_testpaper_tbl 
+    inner join exam_question_tbl 
+    		on exam_question_tbl.testpaper_id = exam_testpaper_tbl.testpaper_id
+    where exam_testpaper_tbl.code = #{categoryCode,jdbcType=VARCHAR}
+      and exam_testpaper_tbl.user_id = #{userId,jdbcType=VARCHAR}
+    group by 
+    	 exam_question_tbl.testpaper_id
+    	,exam_testpaper_tbl.category_name
+    	,exam_testpaper_tbl.total_score
+    	,exam_testpaper_tbl.score
+    	,exam_testpaper_tbl.pass_flag
+    	,exam_question_tbl.question_type
+    	,exam_question_tbl.correct_flag
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from exam_testpaper_tbl
     where testpaper_id = #{testpaperId,jdbcType=BIGINT}

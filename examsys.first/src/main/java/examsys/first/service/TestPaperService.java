@@ -1,5 +1,7 @@
 package examsys.first.service;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 import examsys.first.domain.Category;
 import examsys.first.domain.TestPaper;
 import examsys.first.pageParam.TestPaperParam;
@@ -17,4 +19,6 @@ public interface TestPaperService {
 	 * @param param
 	 */
 	public void saveTestScore(TestPaperParam param, String userId);
+	
+	public TestPaper getGrade(String categoryCode, String userId);
 }

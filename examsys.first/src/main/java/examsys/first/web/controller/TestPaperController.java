@@ -2,6 +2,7 @@ package examsys.first.web.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,9 +39,10 @@ public class TestPaperController {
 			logger.warn("考试类别ID为NULL");
 			return CommonUtils.getJsonObj(false, null);
 		}
-		request.getSession(true).setAttribute("userId", "ABCDE");
-		// 因为暂时没有用户ID，所以用sessionid来代替userid
-		TestPaper paper = testPaperService.generateTestPaper(category, request.getRequestedSessionId());
+		String userId = getUserId();
+		request.getSession(true).setAttribute("userId", userId);
+		// TODO:因为暂时没有用户ID，所以用sessionid来代替userid
+		TestPaper paper = testPaperService.generateTestPaper(category, userId);
 		request.getSession(true).setAttribute("testPaper", paper);
 		return CommonUtils.getJsonObj(true, paper);
 	}
@@ -50,19 +52,47 @@ public class TestPaperController {
 	public Object submitTestPaper(@RequestBody TestPaperParam param, HttpServletRequest request) {
 		logger.info(param);
 		logger.info(Thread.currentThread().getId());
-		
+		String userId = (String)request.getSession(true).getAttribute("userId");
 		// 异步调用服务，计算考试成绩
-		testPaperService.saveTestScore(param, request.getRequestedSessionId());
+		testPaperService.saveTestScore(param, userId);
 		
 		// 取出缓存
 		CacheManager cacheManager = (CacheManager)CommonUtils.getContextBean("cacheManager");
-		TestPaper cache = (TestPaper)cacheManager.getCache("examCache").get(request.getRequestedSessionId()).get();
+		TestPaper cache = (TestPaper)cacheManager.getCache("examCache").get(userId).get();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("categoryCode", cache.getCode());
-		map.put("userId", request.getRequestedSessionId());
+		map.put("userId", userId);
 		
 		// 从缓存里取出试题
 		return CommonUtils.getJsonMapObj(true, map);
+	}
+	
+	/**
+	 * 根据考试类别和用户id取得考试成绩
+	 * @param categoryCode
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value="/testpapergrade/{categoryCode}/{userId}")
+	public Object getGrade(@PathVariable("categoryCode") String categoryCode, @PathVariable("userId") String userId) {
+		TestPaper testPaper = testPaperService.getGrade(categoryCode, userId);
+		return CommonUtils.getJsonObj(true, testPaper);
+	}
+	
+	/**
+	 * 模拟一个随机的用户id
+	 * @return
+	 */
+	private String getUserId() {
+		String [] generator = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N",
+							   "a","b","c","d","e","f","g","h","i","j","k","l","m","n",
+							   "0","1","2","3","4","5","6","7","8","9"};
+		Random rdm = new Random();
+		String userId = "";
+		for(int i = 0; i < 15; i++) {
+			userId = userId + generator[rdm.nextInt(37)];
+		}
+		return userId;
 	}
 }

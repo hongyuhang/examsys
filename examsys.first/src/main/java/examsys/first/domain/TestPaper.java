@@ -33,4 +33,5 @@ public class TestPaper extends BaseInfo  {
     private String userId;
     
     private Map<Integer, List<Item>> testContent;
+    private List<QuestionType> questions;
 }

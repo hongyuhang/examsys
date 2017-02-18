@@ -4,12 +4,13 @@
   <resultMap id="BaseResultMap" type="examsys.first.domain.Question" >
     <id column="question_id" property="questionId" jdbcType="BIGINT" />
     <result column="testpaper_id" property="testpaperId" jdbcType="BIGINT" />
+    <result column="question_type" property="questionType" jdbcType="TINYINT" />
     <result column="question_content" property="questionContent" jdbcType="VARCHAR" />
     <result column="seq" property="seq" jdbcType="INTEGER" />
     <result column="correct_flag" property="correctFlag" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    question_id, testpaper_id, question_content, seq, correct_flag
+    question_id, testpaper_id, question_type, question_content, seq, correct_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -39,6 +40,9 @@
       <if test="questionContent != null" >
         question_content,
       </if>
+      <if test="questionType != null" >
+        question_type,
+      </if>
       <if test="seq != null" >
         seq,
       </if>
@@ -55,6 +59,9 @@
       </if>
       <if test="questionContent != null" >
         #{questionContent,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null" >
+        #{questionType,jdbcType=TINYINT},
       </if>
       <if test="seq != null" >
         #{seq,jdbcType=INTEGER},

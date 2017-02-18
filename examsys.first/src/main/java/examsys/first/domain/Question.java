@@ -8,6 +8,8 @@ public class Question extends BaseInfo  {
     private Long testpaperId;
 
     private String questionContent;
+    
+    private Integer questionType;
 
     private Integer seq;
 
@@ -61,6 +63,14 @@ public class Question extends BaseInfo  {
 
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
+	}
+
+	public Integer getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(Integer questionType) {
+		this.questionType = questionType;
 	}
     
     

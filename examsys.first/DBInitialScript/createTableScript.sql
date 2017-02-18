@@ -50,14 +50,14 @@ CREATE TABLE `exam_option_tbl` (
 
 -- Create syntax for TABLE 'exam_question_tbl'
 CREATE TABLE `exam_question_tbl` (
-  `question_id` bigint(10) NOT NULL,
+  `question_id` bigint(10) NOT NULL AUTO_INCREMENT,
   `testpaper_id` bigint(10) DEFAULT NULL,
   `question_content` varchar(200) NOT NULL,
   `seq` int(11) NOT NULL,
   `question_type` int(2) DEFAULT NULL,
   `correct_flag` tinyint(2) NOT NULL COMMENT '0:不正确\n1:正确',
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='考试试题表';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='考试试题表';
 
 -- Create syntax for TABLE 'exam_testpaper_tbl'
 CREATE TABLE `exam_testpaper_tbl` (

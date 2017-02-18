@@ -248,7 +248,7 @@ function AnswerContents () {
 			self.show();
 		});
 		$('#nextBtn').click(function(){
-			if (self.currentIndex == self.questions.length) {
+			if (self.currentIndex == self.questions.length - 1) {
 				return;
 			}
 			self.currentIndex++;
@@ -379,7 +379,7 @@ function submitTestPaper() {
 		contentType:"application/json",
 		success:function(data) {
 			if (data.flag) {
-				var url = serverContext + "/gradeInfo.html?code=" + data.data.categoryCode + "&userId=" + data.data.userId;
+				var url = serverContext + "/jquerybootstrap/gradeInfo.html?code=" + data.data.categoryCode + "&userId=" + data.data.userId;
 				$.alert({
 				    title: '提示',
 				    content: '交卷成功!可以马上前往<a href="' + url + '">这里</a>确认考试成绩，或者稍后再确认。',

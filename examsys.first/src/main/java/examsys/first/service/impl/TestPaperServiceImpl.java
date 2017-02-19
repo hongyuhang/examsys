@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import examsys.base.service.ILogService;
 import examsys.first.common.CommonUtils;
 import examsys.first.dao.AnswerMapper;
 import examsys.first.dao.ItemMapper;
@@ -41,6 +43,8 @@ public class TestPaperServiceImpl implements TestPaperService {
 	private QuestionMapper questionMapper;
 	@Autowired
 	private AnswerMapper answerMapper;
+	@Autowired
+	private ILogService logService;
 	
 	/**
 	 * 根据考试类型随机生成一张试卷,并将userid作为key，放到缓存里
@@ -89,12 +93,23 @@ public class TestPaperServiceImpl implements TestPaperService {
 	 */
 	@Async("asyncExecutor")
 	public void saveTestScore(TestPaperParam param, String userId) {
-		// TODO:直接把考试内容保存进mongodb中
-		
 		// 取出缓存
 		CacheManager cacheManager = (CacheManager)CommonUtils.getContextBean("cacheManager");
 		TestPaper cache = (TestPaper)cacheManager.getCache("examCache").get(userId).get();
-		// TODO:用缓存的数据和提交的试卷进行对比，判分
+		
+		// 直接把考试内容保存进mongodb中
+		try {
+			Map<String, Object> log = new HashMap<String, Object>();
+			log.put("cache", cache);
+			log.put("result", param);
+			log.put("userId", userId);
+			logger.info("远程RPC调用Log服务开始");
+			logService.saveLog(log);
+			logger.info("远程RPC调用Log服务结束");
+		} catch(Exception e) {
+			logger.error("远程RPC调用log服务出现异常!", e);
+		}
+		// 用缓存的数据和提交的试卷进行对比，判分
 		List<Question> questions = new ArrayList<Question>();
 		int finalScore = 0;
 		// TODO:写的不好，应该把形成最终结果的逻辑和计算分数的逻辑分开

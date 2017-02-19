@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+       default-lazy-init="false">
+
+    <!-- 消费者基础配置 -->
+    <dubbo:application
+            name="dubbo-consumer"/>
+
+    <!-- 注册中心配置 -->
+    <dubbo:registry
+            protocol="zookeeper"
+            address="127.0.0.1"
+            port="2181"/>
+
+    <!-- 引用配置 -->
+    <dubbo:reference interface="examsys.base.service.ILogService" id="logService" async="true"/>
+
+</beans>

@@ -30,10 +30,15 @@
 	前端使用Vue2重新实现一遍
 	状态：未开始
 	
-	
+
 运行步骤：
+
 1.启动mysql
+
 2.启动mongoDB : ~/Documents/mongodb/bin/mongod --dbpath /Users/hongyuhang/Documents/data/db/
+
 3.启动zookeeper : ~/Documents/zookeeper/bin/zkServer.sh start
+
 4.启动examsys.logic工程
+
 5.启动examsys.first工程

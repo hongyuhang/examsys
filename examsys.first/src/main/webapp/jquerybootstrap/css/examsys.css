@@ -80,7 +80,7 @@ input[type="url"],
 input[type="email"],
 textarea {
   padding: 7px 7px;
-  border: 1px solid #ebebeb;
+  border: 1px solid black;
   border-radius: 2px;
   -webkit-transition: all 0.2s;
        -o-transition: all 0.2s;
@@ -91,7 +91,7 @@ input[type="text"]:focus,
 input[type="url"]:focus,
 input[type="email"]:focus,
 textarea:focus {
-  border: 1px solid #f4645f;
+  border: 1px solid black;
   outline: none;
 }
 blockquote {

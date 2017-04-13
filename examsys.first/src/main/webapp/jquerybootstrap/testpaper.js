@@ -148,6 +148,8 @@ AnswersInfo = function() {
 			}
 			self.infos[index].removeClass("btn-warning");
 			self.infos[index].addClass("btn-info");
+			self.infos[index].children(":eq(0)").removeClass("glyphicon-remove-circle");
+			self.infos[index].children(":eq(0)").addClass("glyphicon-ok-circle");
 		} else {
 			if ($.inArray("btn-info", classes) >= 0) {
 				topTitle.noAnswerCount++;
@@ -155,6 +157,8 @@ AnswersInfo = function() {
 			}
 			self.infos[index].removeClass("btn-info");
 			self.infos[index].addClass("btn-warning");
+			self.infos[index].children(":eq(0)").removeClass("glyphicon-ok-circle");
+			self.infos[index].children(":eq(0)").addClass("glyphicon-remove-circle");
 		}
 	}
 	// 显示全部考题的按钮
